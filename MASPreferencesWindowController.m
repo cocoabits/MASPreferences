@@ -39,24 +39,11 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 {
     if ((self = [super initWithWindowNibName:@"MASPreferencesWindow"]))
     {
-        _viewControllers = [viewControllers retain];
+        _viewControllers = viewControllers;
         _minimumViewRects = [[NSMutableDictionary alloc] init];
         _title = [title copy];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[self window] setDelegate:nil];
-    
-    [_viewControllers release];
-    [_selectedViewController release];
-    [_minimumViewRects release];
-    [_title release];
-    
-    [super dealloc];
 }
 
 #pragma mark -
@@ -153,7 +140,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
         toolbarItem.target = self;
         toolbarItem.action = @selector(toolbarItemDidClick:);
     }
-    return [toolbarItem autorelease];
+    return toolbarItem;
 }
 
 #pragma mark -
@@ -209,11 +196,10 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
             return;
         }
 
-        [self.window setContentView:[[[NSView alloc] init] autorelease]];
+        [self.window setContentView:[[NSView alloc] init]];
         if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
             [_selectedViewController viewDidDisappear];
 
-        [_selectedViewController release];
         _selectedViewController = nil;
     }
 
@@ -260,7 +246,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 
     [self.window setFrame:newFrame display:YES animate:[self.window isVisible]];
     
-    _selectedViewController = [controller retain];
+    _selectedViewController = controller;
     if ([controller respondsToSelector:@selector(viewWillAppear)])
         [controller viewWillAppear];
     
