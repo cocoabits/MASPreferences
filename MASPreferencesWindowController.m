@@ -38,24 +38,11 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 {
     if ((self = [super initWithWindowNibName:@"MASPreferencesWindow"]))
     {
-        _viewControllers = [viewControllers retain];
+        _viewControllers = viewControllers;
         _minimumViewRects = [[NSMutableDictionary alloc] init];
         _title = [title copy];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[self window] setDelegate:nil];
-    
-    [_viewControllers release];
-    [_selectedViewController release];
-    [_minimumViewRects release];
-    [_title release];
-    
-    [super dealloc];
 }
 
 #pragma mark -
@@ -154,13 +141,13 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     NSUInteger controllerIndex = [identifiers indexOfObject:itemIdentifier];
     if (controllerIndex != NSNotFound)
     {
-        id <MASPreferencesViewController> controller = [_viewControllers objectAtIndex:controllerIndex];
+        id <MASPreferencesViewController> controller = _viewControllers[controllerIndex];
         toolbarItem.image = controller.toolbarItemImage;
         toolbarItem.label = controller.toolbarItemLabel;
         toolbarItem.target = self;
         toolbarItem.action = @selector(toolbarItemDidClick:);
     }
-    return [toolbarItem autorelease];
+    return toolbarItem;
 }
 
 #pragma mark -
@@ -216,11 +203,10 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
             return;
         }
 
-        [self.window setContentView:[[[NSView alloc] init] autorelease]];
+        [self.window setContentView:[[NSView alloc] init]];
         if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
             [_selectedViewController viewDidDisappear];
 
-        [_selectedViewController release];
         _selectedViewController = nil;
     }
 
@@ -243,9 +229,9 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 
     // Retrieve current and minimum frame size for the view
     NSString *oldViewRectString = [[NSUserDefaults standardUserDefaults] stringForKey:PreferencesKeyForViewBounds(controller.identifier)];
-    NSString *minViewRectString = [_minimumViewRects objectForKey:controller.identifier];
+    NSString *minViewRectString = _minimumViewRects[controller.identifier];
     if (!minViewRectString)
-        [_minimumViewRects setObject:NSStringFromRect(controllerView.bounds) forKey:controller.identifier];
+        _minimumViewRects[controller.identifier] = NSStringFromRect(controllerView.bounds);
     BOOL sizableWidth  = [controllerView autoresizingMask] & NSViewWidthSizable;
     BOOL sizableHeight = [controllerView autoresizingMask] & NSViewHeightSizable;
     NSRect oldViewRect = oldViewRectString ? NSRectFromString(oldViewRectString) : controllerView.bounds;
@@ -267,7 +253,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 
     [self.window setFrame:newFrame display:YES animate:[self.window isVisible]];
     
-    _selectedViewController = [controller retain];
+    _selectedViewController = controller;
     if ([controller respondsToSelector:@selector(viewWillAppear)])
         [controller viewWillAppear];
     
@@ -298,7 +284,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 - (void)selectControllerAtIndex:(NSUInteger)controllerIndex
 {
     if (NSLocationInRange(controllerIndex, NSMakeRange(0, _viewControllers.count)))
-        self.selectedViewController = [self.viewControllers objectAtIndex:controllerIndex];
+        self.selectedViewController = (self.viewControllers)[controllerIndex];
 }
 
 #pragma mark -
@@ -310,7 +296,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     NSUInteger numberOfControllers = [_viewControllers count];
 
     do { selectedIndex = (selectedIndex + 1) % numberOfControllers; }
-    while ([_viewControllers objectAtIndex:selectedIndex] == [NSNull null]);
+    while (_viewControllers[selectedIndex] == [NSNull null]);
 
     [self selectControllerAtIndex:selectedIndex];
 }
@@ -321,7 +307,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     NSUInteger numberOfControllers = [_viewControllers count];
 
     do { selectedIndex = (selectedIndex + numberOfControllers - 1) % numberOfControllers; }
-    while ([_viewControllers objectAtIndex:selectedIndex] == [NSNull null]);
+    while (_viewControllers[selectedIndex] == [NSNull null]);
 
     [self selectControllerAtIndex:selectedIndex];
 }
