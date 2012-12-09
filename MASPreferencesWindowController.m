@@ -326,4 +326,17 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     [self selectControllerAtIndex:selectedIndex];
 }
 
+#pragma mark -
+
+// Close the window with cmd+w in case the app doesn't have a main menu
+- (void)keyDown:(NSEvent *)theEvent
+{
+    NSString *key = [theEvent charactersIgnoringModifiers];
+    if (([theEvent modifierFlags] & NSCommandKeyMask) && [key isEqualToString:@"w"]){
+        [self close];
+    } else {
+        [super keyDown:theEvent];
+    }
+}
+
 @end
