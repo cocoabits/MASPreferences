@@ -155,7 +155,12 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     if (controllerIndex != NSNotFound)
     {
         id <MASPreferencesViewController> controller = [_viewControllers objectAtIndex:controllerIndex];
-        toolbarItem.image = controller.toolbarItemImage;
+        if ([controller respondsToSelector:@selector(toolbarItemView)]) {
+            toolbarItem.view = controller.toolbarItemView;
+        } else {
+            NSAssert([controller respondsToSelector:@selector(toolbarItemImage)], @"Must implement toolbarItemImage or toolbarItemView");
+            toolbarItem.image = controller.toolbarItemImage;
+        }
         toolbarItem.label = controller.toolbarItemLabel;
         toolbarItem.target = self;
         toolbarItem.action = @selector(toolbarItemDidClick:);
