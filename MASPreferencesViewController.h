@@ -8,14 +8,27 @@
 
 - (void)viewWillAppear;
 - (void)viewDidDisappear;
-- (NSView*)initialKeyView;
+- (NSView *)initialKeyView;
 
-@property (nonatomic, readonly) NSView *toolbarItemView;
+// Custom NSView to be used for the NSToolbarItem.customView
+// for this preference pane.
+//
+// If this is property is present it will be used instead the
+// toolbarItemImage property is ignored.
+// Either this property or toolbarItemImage must be implemented.
+@property (nonatomic, readonly, strong) NSView *toolbarItemView;
+
+// NSImage to be used for the NSToolbarItem for this view controller.
+//
+// If this property is not implemented, then toolbarItemView must be implemented.
+@property (nonatomic, readonly, strong) NSImage *toolbarItemImage;
 
 @required
 
-@property (nonatomic, readonly) NSString *identifier;
-@property (nonatomic, readonly) NSImage *toolbarItemImage;
-@property (nonatomic, readonly) NSString *toolbarItemLabel;
+// String identifier for this preference pane.
+@property (nonatomic, readonly, strong) NSString *identifier;
+
+// Label for this preference pane.
+@property (nonatomic, readonly, strong) NSString *toolbarItemLabel;
 
 @end
