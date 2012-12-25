@@ -158,6 +158,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
         if ([controller respondsToSelector:@selector(toolbarItemView)]) {
             toolbarItem.view = controller.toolbarItemView;
         } else {
+            NSAssert([controller respondsToSelector:@selector(toolbarItemImage)], @"Must implement toolbarItemImage or toolbarItemView");
             toolbarItem.image = controller.toolbarItemImage;
         }
         toolbarItem.label = controller.toolbarItemLabel;
