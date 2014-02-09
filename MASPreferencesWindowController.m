@@ -254,7 +254,11 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     }
 
     [[self.window toolbar] setSelectedItemIdentifier:controller.identifier];
-
+    if( self.useTabTitle )
+    {
+        [self.window setTitle:controller.title?:@""];
+    }
+    
     // Record new selected controller in user defaults
     [[NSUserDefaults standardUserDefaults] setObject:controller.identifier forKey:kMASPreferencesSelectedViewKey];
     

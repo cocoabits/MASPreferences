@@ -31,6 +31,7 @@ __attribute__((__visibility__("default")))
 @property (nonatomic, readonly, retain) NSViewController <MASPreferencesViewController> *selectedViewController;
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, retain) IBOutlet NSToolbar *toolbar;
+@property (nonatomic) BOOL useTabTitle;
 
 - (id)initWithViewControllers:(NSArray *)viewControllers;
 - (id)initWithViewControllers:(NSArray *)viewControllers title:(NSString *)title;
