@@ -52,6 +52,11 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[self window] setDelegate:nil];
+    for (NSToolbarItem *item in [self.toolbar items]) {
+        item.target = nil;
+        item.action = nil;
+    }
+    self.toolbar.delegate = nil;
 #if !__has_feature(objc_arc)
     [_viewControllers release];
     [_selectedViewController release];
