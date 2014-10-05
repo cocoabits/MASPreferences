@@ -37,6 +37,7 @@ __attribute__((__visibility__("default")))
 - (void)addViewController:(NSViewController <MASPreferencesViewController> *) viewController;
 
 - (void)selectControllerAtIndex:(NSUInteger)controllerIndex;
+- (void)selectControllerWithIdentifier:(NSString *)identifier;
 
 - (IBAction)goNextTab:(id)sender;
 - (IBAction)goPreviousTab:(id)sender;

@@ -336,6 +336,11 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
         self.selectedViewController = [self.viewControllers objectAtIndex:controllerIndex];
 }
 
+- (void)selectControllerWithIdentifier:(NSString *)identifier 
+{
+    self.selectedViewController = [self viewControllerForIdentifier:identifier];
+}
+
 #pragma mark -
 #pragma mark Actions
 
