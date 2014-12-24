@@ -303,8 +303,12 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 #else
     _selectedViewController = [controller retain];
 #endif
-    if ([controller respondsToSelector:@selector(viewWillAppear)])
-        [controller viewWillAppear];
+    // In OSX 10.10, setContentView below calls viewWillAppear.  We still want to call viewWillAppear on < 10.10,
+    // so the check below avoids calling viewWillAppear twice on 10.10.
+    // See https://github.com/shpakovski/MASPreferences/issues/32 for more info.
+    if (![NSViewController instancesRespondToSelector:@selector(viewWillAppear)])
+        if ([controller respondsToSelector:@selector(viewWillAppear)])
+            [controller viewWillAppear];
     
     [self.window setContentView:controllerView];
     [self.window recalculateKeyViewLoop];
