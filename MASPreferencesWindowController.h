@@ -23,7 +23,7 @@ __attribute__((__visibility__("default")))
     NSMutableDictionary *_minimumViewRects;
     NSString *_title;
     NSViewController <MASPreferencesViewController> *_selectedViewController;
-	IBOutlet NSToolbar *toolbar;
+	IBOutlet NSToolbar *_toolbar;
 }
 
 @property (nonatomic, readonly) NSMutableArray *viewControllers;
