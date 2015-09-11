@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.license               = { :type => 'BSD', :file => 'LICENSE.md' }
   s.author                = { "Vadim Shpakovski" => "vadim@shpakovski.com" }
   s.source                = { :git => 'https://github.com/shpakovski/MASPreferences.git', :tag => '1.1.2' }
-  s.source_files          = '*.{h,m}'
+  s.source_files          = 'Framework/*.{h,m}'
   s.resources             = '*.xib'
   s.exclude_files         = 'README.md', 'LICENSE.md', 'MASPreferences.podspec'
   s.requires_arc          = false

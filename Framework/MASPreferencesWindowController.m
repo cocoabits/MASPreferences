@@ -36,7 +36,8 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 
 - (id)initWithViewControllers:(NSArray *)viewControllers title:(NSString *)title
 {
-    if ((self = [super initWithWindowNibName:@"MASPreferencesWindow"]))
+    NSString *nibPath = [[NSBundle bundleForClass:MASPreferencesWindowController.class] pathForResource:@"MASPreferencesWindow" ofType:@"nib"];
+    if ((self = [super initWithWindowNibPath:nibPath owner:self]))
     {
 		_viewControllers = [NSMutableArray arrayWithArray: viewControllers];
 #if !__has_feature(objc_arc)
