@@ -5,7 +5,7 @@ NSString *const kMASPreferencesWindowControllerDidChangeViewNotification = @"MAS
 static NSString *const kMASPreferencesFrameTopLeftKey = @"MASPreferences Frame Top Left";
 static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selected Identifier View";
 
-static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
+static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 {
     return [NSString stringWithFormat:@"MASPreferences %@ Frame", identifier];
 }
@@ -102,17 +102,17 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 #pragma mark -
 #pragma mark NSWindowDelegate
 
-- (BOOL)windowShouldClose:(id)sender
+- (BOOL)windowShouldClose:(id __unused)sender
 {
     return !self.selectedViewController || [self.selectedViewController commitEditing];
 }
 
-- (void)windowDidMove:(NSNotification*)aNotification
+- (void)windowDidMove:(NSNotification* __unused)aNotification
 {
     [[NSUserDefaults standardUserDefaults] setObject:NSStringFromPoint(NSMakePoint(NSMinX([self.window frame]), NSMaxY([self.window frame]))) forKey:kMASPreferencesFrameTopLeftKey];
 }
 
-- (void)windowDidResize:(NSNotification*)aNotification
+- (void)windowDidResize:(NSNotification* __unused)aNotification
 {
     NSViewController <MASPreferencesViewController> *viewController = self.selectedViewController;
     if (viewController)
@@ -144,25 +144,25 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 #pragma mark -
 #pragma mark NSToolbarDelegate
 
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar * __unused)toolbar
 {
     NSArray *identifiers = self.toolbarItemIdentifiers;
     return identifiers;
 }                   
                    
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar * __unused)toolbar
 {
     NSArray *identifiers = self.toolbarItemIdentifiers;
     return identifiers;
 }
 
-- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
+- (NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar * __unused)toolbar
 {
     NSArray *identifiers = self.toolbarItemIdentifiers;
     return identifiers;
 }
 
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+- (NSToolbarItem *)toolbar:(NSToolbar * __unused)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL __unused)flag
 {
     NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
     NSArray *identifiers = self.toolbarItemIdentifiers;
@@ -328,7 +328,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 #pragma mark -
 #pragma mark Actions
 
-- (IBAction)goNextTab:(id)sender
+- (IBAction)goNextTab:(id __unused)sender
 {
     NSUInteger selectedIndex = self.indexOfSelectedController;
     NSUInteger numberOfControllers = [_viewControllers count];
@@ -339,7 +339,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     [self selectControllerAtIndex:selectedIndex];
 }
 
-- (IBAction)goPreviousTab:(id)sender
+- (IBAction)goPreviousTab:(id __unused)sender
 {
     NSUInteger selectedIndex = self.indexOfSelectedController;
     NSUInteger numberOfControllers = [_viewControllers count];
