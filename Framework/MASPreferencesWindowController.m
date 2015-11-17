@@ -217,8 +217,10 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
         [self.window setContentView:[[[NSView alloc] init] autorelease]];
 #endif
         [_selectedViewController setNextResponder:nil];
-        if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
-            [_selectedViewController viewDidDisappear];
+        // With 10.10 and later AppKit will invoke viewDidDisappear so we need to prevent it from being called twice.
+        if (![NSViewController instancesRespondToSelector:@selector(viewDidDisappear)])
+            if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
+                [_selectedViewController viewDidDisappear];
 
 #if !__has_feature(objc_arc)
         [_selectedViewController release];
