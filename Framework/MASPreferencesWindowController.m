@@ -1,4 +1,5 @@
 #import "MASPreferencesWindowController.h"
+#import "ARCBridge.h"
 
 NSString *const kMASPreferencesWindowControllerDidChangeViewNotification = @"MASPreferencesWindowControllerDidChangeViewNotification";
 
@@ -39,10 +40,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     NSString *nibPath = [[NSBundle bundleForClass:MASPreferencesWindowController.class] pathForResource:@"MASPreferencesWindow" ofType:@"nib"];
     if ((self = [super initWithWindowNibPath:nibPath owner:self]))
     {
-		_viewControllers = [NSMutableArray arrayWithArray: viewControllers];
-#if !__has_feature(objc_arc)
-        _viewControllers = [_viewControllers retain];
-#endif
+		_viewControllers = RETAINOBJ([NSMutableArray arrayWithArray: viewControllers]);
         _minimumViewRects = [[NSMutableDictionary alloc] init];
         _title = [title copy];
     }
@@ -176,10 +174,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
         toolbarItem.target = self;
         toolbarItem.action = @selector(toolbarItemDidClick:);
     }
-#if !__has_feature(objc_arc)
-    [toolbarItem autorelease];
-#endif
-    return toolbarItem;
+    return AUTORELEASEOBJ(toolbarItem);
 }
 
 #pragma mark -
@@ -211,20 +206,14 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
             return;
         }
 
-#if __has_feature(objc_arc)
-        [self.window setContentView:[[NSView alloc] init]];
-#else
-        [self.window setContentView:[[[NSView alloc] init] autorelease]];
-#endif
+        [self.window setContentView:AUTORELEASEOBJ([[NSView alloc] init])];
         [_selectedViewController setNextResponder:nil];
         // With 10.10 and later AppKit will invoke viewDidDisappear so we need to prevent it from being called twice.
         if (![NSViewController instancesRespondToSelector:@selector(viewDidDisappear)])
             if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
                 [_selectedViewController viewDidDisappear];
 
-#if !__has_feature(objc_arc)
-        [_selectedViewController release];
-#endif
+        RELEASEOBJ(_selectedViewController);
         _selectedViewController = nil;
     }
 
@@ -278,11 +267,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 
     [self.window setFrame:newFrame display:YES animate:[self.window isVisible]];
     
-#if __has_feature(objc_arc)
-    _selectedViewController = controller;
-#else
-    _selectedViewController = [controller retain];
-#endif
+    _selectedViewController = RETAINOBJ(controller);
     // In OSX 10.10, setContentView below calls viewWillAppear.  We still want to call viewWillAppear on < 10.10,
     // so the check below avoids calling viewWillAppear twice on 10.10.
     // See https://github.com/shpakovski/MASPreferences/issues/32 for more info.
