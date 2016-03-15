@@ -1,6 +1,5 @@
 Pod::Spec.new do |s|
   s.platform              = :osx
-  s.osx.deployment_target = "10.5"
   s.name                  = "MASPreferences"
   s.version               = "1.1.2"
   s.summary               = "Modern implementation of the Preferences window for OS X apps, used in TextMate, GitBox and Mou."
