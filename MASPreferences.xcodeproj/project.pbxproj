@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F16AF8081BA27AFD0022155C /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F16AF8001BA27AFD0022155C /* MASPreferencesWindow.xib */; settings = {ASSET_TAGS = (); }; };
+		55050B571C515AEA00C21789 /* ARCBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 55050B561C515AEA00C21789 /* ARCBridge.h */; };
+		F16AF8081BA27AFD0022155C /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F16AF8001BA27AFD0022155C /* MASPreferencesWindow.xib */; };
 		F16AF80A1BA27AFD0022155C /* MASPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = F16AF8031BA27AFD0022155C /* MASPreferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F16AF80B1BA27AFD0022155C /* MASPreferencesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F16AF8051BA27AFD0022155C /* MASPreferencesViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F16AF80C1BA27AFD0022155C /* MASPreferencesWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = F16AF8061BA27AFD0022155C /* MASPreferencesWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F16AF80D1BA27AFD0022155C /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16AF8071BA27AFD0022155C /* MASPreferencesWindowController.m */; settings = {ASSET_TAGS = (); }; };
+		F16AF80D1BA27AFD0022155C /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16AF8071BA27AFD0022155C /* MASPreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55050B561C515AEA00C21789 /* ARCBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCBridge.h; sourceTree = "<group>"; };
 		F16AF7F41BA279F10022155C /* MASPreferences.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MASPreferences.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16AF8011BA27AFD0022155C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MASPreferencesWindow.xib; sourceTree = "<group>"; };
 		F16AF8021BA27AFD0022155C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		F16AF7FF1BA27AFD0022155C /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				55050B561C515AEA00C21789 /* ARCBridge.h */,
 				F16AF8051BA27AFD0022155C /* MASPreferencesViewController.h */,
 				F16AF8061BA27AFD0022155C /* MASPreferencesWindowController.h */,
 				F16AF8071BA27AFD0022155C /* MASPreferencesWindowController.m */,
@@ -73,6 +76,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55050B571C515AEA00C21789 /* ARCBridge.h in Headers */,
 				F16AF80A1BA27AFD0022155C /* MASPreferences.h in Headers */,
 				F16AF80C1BA27AFD0022155C /* MASPreferencesWindowController.h in Headers */,
 				F16AF80B1BA27AFD0022155C /* MASPreferencesViewController.h in Headers */,
