@@ -10,15 +10,16 @@
 
 - (void)viewWillAppear;
 - (void)viewDidDisappear;
-- (NSView *)initialKeyView;
+
+- (nullable NSView *)initialKeyView;
 
 @property (nonatomic, readonly) BOOL hasResizableWidth;
 @property (nonatomic, readonly) BOOL hasResizableHeight;
 
 @required
 
-@property (nonatomic, readonly) NSString *identifier;
-@property (nonatomic, readonly) NSImage *toolbarItemImage;
-@property (nonatomic, readonly) NSString *toolbarItemLabel;
+@property (nonatomic, readonly, nullable) NSString *identifier;
+@property (nonatomic, readonly, nonnull) NSImage *toolbarItemImage;
+@property (nonatomic, readonly, nonnull) NSString *toolbarItemLabel;
 
 @end

@@ -15,3 +15,5 @@ profile
 *.moved-aside
 # Finder
 .DS_Store
+# Carthage
+Carthage/Build

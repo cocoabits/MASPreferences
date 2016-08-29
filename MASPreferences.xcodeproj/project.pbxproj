@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F16AF8081BA27AFD0022155C /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F16AF8001BA27AFD0022155C /* MASPreferencesWindow.xib */; settings = {ASSET_TAGS = (); }; };
+		F16AF8081BA27AFD0022155C /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F16AF8001BA27AFD0022155C /* MASPreferencesWindow.xib */; };
 		F16AF80A1BA27AFD0022155C /* MASPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = F16AF8031BA27AFD0022155C /* MASPreferences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F16AF80B1BA27AFD0022155C /* MASPreferencesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F16AF8051BA27AFD0022155C /* MASPreferencesViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F16AF80C1BA27AFD0022155C /* MASPreferencesWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = F16AF8061BA27AFD0022155C /* MASPreferencesWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F16AF80D1BA27AFD0022155C /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16AF8071BA27AFD0022155C /* MASPreferencesWindowController.m */; settings = {ASSET_TAGS = (); }; };
+		F16AF80D1BA27AFD0022155C /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16AF8071BA27AFD0022155C /* MASPreferencesWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,7 +106,7 @@
 		F16AF7EB1BA279F10022155C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Vadim Shpakovski";
 				TargetAttributes = {
 					F16AF7F31BA279F10022155C = {
@@ -177,8 +177,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -218,8 +220,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
