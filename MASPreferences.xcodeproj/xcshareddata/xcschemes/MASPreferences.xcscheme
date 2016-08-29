@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5FCD6DC41D73B100009CF7C5"
-               BuildableName = "MASPreferencesKit.framework"
-               BlueprintName = "MASPreferencesKit"
-               ReferencedContainer = "container:MASPreferencesKit.xcodeproj">
+               BlueprintIdentifier = "F16AF7F31BA279F10022155C"
+               BuildableName = "MASPreferences.framework"
+               BlueprintName = "MASPreferences"
+               ReferencedContainer = "container:MASPreferences.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5FCD6DC41D73B100009CF7C5"
-            BuildableName = "MASPreferencesKit.framework"
-            BlueprintName = "MASPreferencesKit"
-            ReferencedContainer = "container:MASPreferencesKit.xcodeproj">
+            BlueprintIdentifier = "F16AF7F31BA279F10022155C"
+            BuildableName = "MASPreferences.framework"
+            BlueprintName = "MASPreferences"
+            ReferencedContainer = "container:MASPreferences.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5FCD6DC41D73B100009CF7C5"
-            BuildableName = "MASPreferencesKit.framework"
-            BlueprintName = "MASPreferencesKit"
-            ReferencedContainer = "container:MASPreferencesKit.xcodeproj">
+            BlueprintIdentifier = "F16AF7F31BA279F10022155C"
+            BuildableName = "MASPreferences.framework"
+            BlueprintName = "MASPreferences"
+            ReferencedContainer = "container:MASPreferences.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
