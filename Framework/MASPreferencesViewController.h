@@ -18,7 +18,7 @@
 
 @required
 
-@property (nonatomic, readonly, nonnull) NSString *identifier;
+@property (nonatomic, readonly, nullable) NSString *identifier;
 @property (nonatomic, readonly, nonnull) NSImage *toolbarItemImage;
 @property (nonatomic, readonly, nonnull) NSString *toolbarItemLabel;
 
