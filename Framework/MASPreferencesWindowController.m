@@ -27,6 +27,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 @synthesize selectedViewController = _selectedViewController;
 @synthesize title = _title;
 @synthesize toolbar = _toolbar;
+
 #pragma mark -
 
 - (id)initWithViewControllers:(NSArray *)viewControllers
@@ -39,10 +40,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     NSString *nibPath = [[NSBundle bundleForClass:MASPreferencesWindowController.class] pathForResource:@"MASPreferencesWindow" ofType:@"nib"];
     if ((self = [super initWithWindowNibPath:nibPath owner:self]))
     {
-		_viewControllers = [NSMutableArray arrayWithArray: viewControllers];
-#if !__has_feature(objc_arc)
-        _viewControllers = [_viewControllers retain];
-#endif
+		_viewControllers = [viewControllers mutableCopy];
         _minimumViewRects = [[NSMutableDictionary alloc] init];
         _title = [title copy];
     }
@@ -58,13 +56,6 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
         item.action = nil;
     }
     self.toolbar.delegate = nil;
-#if !__has_feature(objc_arc)
-    [_viewControllers release];
-    [_selectedViewController release];
-    [_minimumViewRects release];
-    [_title release];
-    [super dealloc];
-#endif
 }
 
 - (void)addViewController: (NSViewController <MASPreferencesViewController> *) viewController
@@ -176,9 +167,6 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
         toolbarItem.target = self;
         toolbarItem.action = @selector(toolbarItemDidClick:);
     }
-#if !__has_feature(objc_arc)
-    [toolbarItem autorelease];
-#endif
     return toolbarItem;
 }
 
@@ -210,21 +198,12 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
             [[self.window toolbar] setSelectedItemIdentifier:_selectedViewController.identifier];
             return;
         }
-
-#if __has_feature(objc_arc)
         [self.window setContentView:[[NSView alloc] init]];
-#else
-        [self.window setContentView:[[[NSView alloc] init] autorelease]];
-#endif
         [_selectedViewController setNextResponder:nil];
         // With 10.10 and later AppKit will invoke viewDidDisappear so we need to prevent it from being called twice.
         if (![NSViewController instancesRespondToSelector:@selector(viewDidDisappear)])
             if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
                 [_selectedViewController viewDidDisappear];
-
-#if !__has_feature(objc_arc)
-        [_selectedViewController release];
-#endif
         _selectedViewController = nil;
     }
 
@@ -278,11 +257,8 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 
     [self.window setFrame:newFrame display:YES animate:[self.window isVisible]];
     
-#if __has_feature(objc_arc)
     _selectedViewController = controller;
-#else
-    _selectedViewController = [controller retain];
-#endif
+	
     // In OSX 10.10, setContentView below calls viewWillAppear.  We still want to call viewWillAppear on < 10.10,
     // so the check below avoids calling viewWillAppear twice on 10.10.
     // See https://github.com/shpakovski/MASPreferences/issues/32 for more info.
