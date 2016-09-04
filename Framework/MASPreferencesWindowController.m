@@ -1,4 +1,5 @@
 #import "MASPreferencesWindowController.h"
+#import "MASPreferencesViewController.h"
 
 NSString *const kMASPreferencesWindowControllerDidChangeViewNotification = @"MASPreferencesWindowControllerDidChangeViewNotification";
 
@@ -30,13 +31,14 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 
 #pragma mark -
 
-- (id)initWithViewControllers:(NSArray *)viewControllers
+- (instancetype)initWithViewControllers:(NSArray *)viewControllers
 {
     return [self initWithViewControllers:viewControllers title:nil];
 }
 
-- (id)initWithViewControllers:(NSArray *)viewControllers title:(NSString *)title
+- (instancetype)initWithViewControllers:(NSArray *)viewControllers title:(NSString *)title
 {
+	NSParameterAssert(viewControllers.count > 0);
     NSString *nibPath = [[NSBundle bundleForClass:MASPreferencesWindowController.class] pathForResource:@"MASPreferencesWindow" ofType:@"nib"];
     if ((self = [super initWithWindowNibPath:nibPath owner:self]))
     {
@@ -58,8 +60,9 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     self.toolbar.delegate = nil;
 }
 
-- (void)addViewController: (NSViewController <MASPreferencesViewController> *) viewController
+- (void)addViewController:(NSViewController <MASPreferencesViewController> *)viewController
 {
+	NSParameterAssert(viewController);
 	[_viewControllers addObject: viewController];
 	[_toolbar insertItemWithItemIdentifier: [viewController identifier] atIndex: ([_viewControllers count] - 1)];
 	[_toolbar validateVisibleItems];
@@ -258,7 +261,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     [self.window setFrame:newFrame display:YES animate:[self.window isVisible]];
     
     _selectedViewController = controller;
-	
+
     // In OSX 10.10, setContentView below calls viewWillAppear.  We still want to call viewWillAppear on < 10.10,
     // so the check below avoids calling viewWillAppear twice on 10.10.
     // See https://github.com/shpakovski/MASPreferences/issues/32 for more info.
@@ -301,6 +304,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 
 - (void)selectControllerWithIdentifier:(NSString *)identifier 
 {
+	NSParameterAssert(identifier.length > 0);
     self.selectedViewController = [self viewControllerForIdentifier:identifier];
 }
 
