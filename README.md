@@ -10,3 +10,12 @@ You can find a Demo project at [MASPreferencesDemo](https://github.com/shpakovsk
 When using Swift you need to override the `identifier` from `MASPreferencesViewController` the following to be compatible with the mutable identifier `String?` in `NSViewController`
 
     override var identifier: String? { get {return "general"} set { super.identifier = newValue} }
+
+# Install
+#### [Carthage](https://github.com/Carthage/Carthage)
+
+- Add `github "shpakovski/MASPreferences"` to your Cartfile.
+
+#### [CocoaPods](https://github.com/cocoapods/cocoapods)
+
+- Add `pod 'MASPreferences'` to your Podfile.
