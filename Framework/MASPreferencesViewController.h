@@ -6,6 +6,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#if !defined(NSUserInterfaceItemIdentifier)
+typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
+#endif
+
 /*!
  * Requirements for the Preferences panel
  */
@@ -14,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * Unique identifier of the Panel represented by the view controller.
  */
-@property (nonatomic, readonly, nullable) NSString *identifier;
+@property (nonatomic, readonly, nullable) NSUserInterfaceItemIdentifier identifier;
 
 /*!
  * Toolbar icon for the Panel represented by the view controller.
