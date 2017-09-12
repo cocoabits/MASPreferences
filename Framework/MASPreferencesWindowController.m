@@ -88,7 +88,10 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 
     NSString *origin = [[NSUserDefaults standardUserDefaults] stringForKey:kMASPreferencesFrameTopLeftKey];
     if (origin)
+    {
+        [self.window layoutIfNeeded];
         [self.window setFrameTopLeftPoint:NSPointFromString(origin)];
+    }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidMove:)   name:NSWindowDidMoveNotification object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:self.window];
