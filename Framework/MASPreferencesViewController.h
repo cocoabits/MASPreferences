@@ -21,11 +21,6 @@ typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
 @property (nonatomic, readonly, nullable) NSUserInterfaceItemIdentifier identifier;
 
 /*!
- * Toolbar icon for the Panel represented by the view controller.
- */
-@property (nonatomic, readonly, nullable) NSImage *toolbarItemImage;
-
-/*!
  * Toolbar item label for the Panel represented by the view controller.
  *
  * This label may be used as a Preferences window title.
@@ -33,6 +28,13 @@ typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
 @property (nonatomic, readonly, nullable) NSString *toolbarItemLabel;
 
 @optional
+
+/*!
+ * Toolbar icon for the Panel represented by the view controller.
+ *
+ * If you do not implement this then the toolbar will only use labels
+ */
+@property (nonatomic, readonly, nullable) NSImage *toolbarItemImage;
 
 /*!
  * Called when selection goes to the Panel represented by the view controller.

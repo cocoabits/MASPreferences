@@ -72,6 +72,14 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 
 - (void)windowDidLoad
 {
+    BOOL hasImages = NO;
+    for (id viewController in self.viewControllers)
+        if ([viewController respondsToSelector:@selector(toolbarItemImage)])
+            hasImages = YES;
+
+    if(hasImages == NO)
+        [[[self window] toolbar] setDisplayMode:NSToolbarDisplayModeLabelOnly];
+
     if ([self.title length] > 0)
         [[self window] setTitle:self.title];
 
@@ -165,7 +173,8 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     if (controllerIndex != NSNotFound)
     {
         id <MASPreferencesViewController> controller = [_viewControllers objectAtIndex:controllerIndex];
-        toolbarItem.image = controller.toolbarItemImage;
+        if ([controller respondsToSelector:@selector(toolbarItemImage)])
+            toolbarItem.image = controller.toolbarItemImage;
         toolbarItem.label = controller.toolbarItemLabel;
         toolbarItem.target = self;
         toolbarItem.action = @selector(toolbarItemDidClick:);
