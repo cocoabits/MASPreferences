@@ -6,10 +6,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#if !defined(NSUserInterfaceItemIdentifier)
-typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
-#endif
-
 /*!
  * Requirements for the Preferences panel
  */
