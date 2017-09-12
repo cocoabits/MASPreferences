@@ -18,7 +18,7 @@ typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
 /*!
  * Unique identifier of the Panel represented by the view controller.
  */
-@property (nonatomic, readonly, nullable) NSUserInterfaceItemIdentifier identifier;
+@property (nonatomic, readonly) NSString* viewIdentifier;
 
 /*!
  * Toolbar item label for the Panel represented by the view controller.
