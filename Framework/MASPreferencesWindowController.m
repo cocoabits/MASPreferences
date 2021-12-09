@@ -93,6 +93,12 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
         [self.window setFrameTopLeftPoint:NSPointFromString(origin)];
     }
 
+#ifdef MAC_OS_VERSION_11_0
+    if (@available(macOS 11.0, *)) {
+        [self.window setToolbarStyle:NSWindowToolbarStylePreference];
+    }
+#endif
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidMove:)   name:NSWindowDidMoveNotification object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:self.window];
 }
