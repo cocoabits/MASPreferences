@@ -39,7 +39,7 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 - (instancetype)initWithViewControllers:(NSArray *)viewControllers title:(NSString *)title
 {
 	NSParameterAssert(viewControllers.count > 0);
-    NSString *nibPath = [[NSBundle bundleForClass:MASPreferencesWindowController.class] pathForResource:@"MASPreferencesWindow" ofType:@"nib"];
+    NSString *nibPath = [[MASPreferencesWindowController resourceBundle] pathForResource:@"MASPreferencesWindow" ofType:@"nib"];
     if ((self = [super initWithWindowNibPath:nibPath owner:self]))
     {
 		_viewControllers = [viewControllers mutableCopy];
@@ -92,6 +92,12 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
         [self.window layoutIfNeeded];
         [self.window setFrameTopLeftPoint:NSPointFromString(origin)];
     }
+
+#ifdef MAC_OS_VERSION_11_0
+    if (@available(macOS 11.0, *)) {
+        [self.window setToolbarStyle:NSWindowToolbarStylePreference];
+    }
+#endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidMove:)   name:NSWindowDidMoveNotification object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:self.window];
@@ -343,6 +349,14 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     while ([_viewControllers objectAtIndex:selectedIndex] == [NSNull null]);
 
     [self selectControllerAtIndex:selectedIndex];
+}
+
+#pragma mark -
+#pragma mark Helper Functions
+
++ (NSBundle *)resourceBundle {
+    NSBundle *moduleBundle = [NSBundle bundleForClass:MASPreferencesWindowController.class];
+    return [NSBundle bundleWithURL:[NSURL fileURLWithPath:[moduleBundle pathForResource:@"MASPreferences" ofType:@"bundle"]]];
 }
 
 @end
