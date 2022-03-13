@@ -355,8 +355,12 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
 #pragma mark Helper Functions
 
 + (NSBundle *)resourceBundle {
+#ifdef SWIFT_PACKAGE
+    return SWIFTPM_MODULE_BUNDLE;
+#else
     NSBundle *moduleBundle = [NSBundle bundleForClass:MASPreferencesWindowController.class];
     return [NSBundle bundleWithURL:[NSURL fileURLWithPath:[moduleBundle pathForResource:@"MASPreferences" ofType:@"bundle"]]];
+#endif
 }
 
 @end

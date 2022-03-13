@@ -17,3 +17,5 @@ profile
 .DS_Store
 # Carthage
 Carthage/Build
+# Swift Package Manager
+.swiftpm
