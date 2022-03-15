@@ -359,7 +359,17 @@ static NSString * PreferencesKeyForViewBounds (NSString *identifier)
     return SWIFTPM_MODULE_BUNDLE;
 #else
     NSBundle *moduleBundle = [NSBundle bundleForClass:MASPreferencesWindowController.class];
-    return [NSBundle bundleWithURL:[NSURL fileURLWithPath:[moduleBundle pathForResource:@"MASPreferences" ofType:@"bundle"]]];
+
+    // Lookup for MASPreferences.bundle, which usually comes with CocoaPods's `:linkage => :static`.
+    NSString *resourceBundlePath = [moduleBundle pathForResource:@"MASPreferences" ofType:@"bundle"];
+    if ([resourceBundlePath length]) {
+        NSBundle *resourceBundle = [NSBundle bundleWithURL:[NSURL fileURLWithPath:resourceBundlePath]];
+        if (resourceBundle) {
+            return resourceBundle;
+        }
+    }
+
+    return moduleBundle;
 #endif
 }
 
