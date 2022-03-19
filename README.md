@@ -18,4 +18,4 @@ You can find a Demo project at [MASPreferencesDemo](https://github.com/shpakovsk
 
 #### [Swift Package Manager](https://www.swift.org/package-manager/)
 
-- Add `.package(url: "https://github.com/shpakovski/MASPreferences.git", .upToNextMajor(from: "1.4"))` to your Package.swift.
+- Add `.package(url: "https://github.com/shpakovski/MASPreferences.git", .upToNextMajor(from: "1.4.1"))` to your Package.swift.
